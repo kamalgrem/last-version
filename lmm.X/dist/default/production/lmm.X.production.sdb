@@ -1,0 +1,222 @@
+[p GLOBOPT AUTOSTATIC PIC14 PICREGULAR PICMID ]
+[d version 1.1 ]
+[d edition pro ]
+[d chip 16F877A ]
+[d frameptr 0 ]
+"5 C:\Program Files\Microchip\xc8\v2.31\pic\sources\c90\common\__lldiv.c
+[v ___lldiv __lldiv `(ul  1 e 4 0 ]
+"62 C:\Program Files\Microchip\xc8\v2.31\pic\sources\c90\common\float.c
+[v ___ftpack __ftpack `(f  1 e 3 0 ]
+"86 C:\Program Files\Microchip\xc8\v2.31\pic\sources\c90\common\ftadd.c
+[v ___ftadd __ftadd `(f  1 e 3 0 ]
+"6 C:\Program Files\Microchip\xc8\v2.31\pic\sources\c90\pic\__eeprom.c
+[v ___eecpymem __eecpymem `(v  1 e 1 0 ]
+"39
+[v ___memcpyee __memcpyee `(v  1 e 1 0 ]
+"30 E:\lmm.X\nb.c
+[v _ADC_Init ADC_Init `(v  1 e 1 0 ]
+"36
+[v _ADC_Read ADC_Read `(ui  1 e 2 0 ]
+"55
+[v _ADC_Read1 ADC_Read1 `(ui  1 e 2 0 ]
+"70
+[v _Shift Shift `(v  1 e 1 0 ]
+"81
+[v _averge averge `(v  1 e 1 0 ]
+"93
+[v _Shi Shi `(v  1 e 1 0 ]
+"104
+[v _aver aver `(v  1 e 1 0 ]
+"119
+[v _ADC1 ADC1 `(v  1 e 1 0 ]
+"140
+[v _num num `(v  1 e 1 0 ]
+"161
+[v _ADC2 ADC2 `(v  1 e 1 0 ]
+"208
+[v _ADC3 ADC3 `(v  1 e 1 0 ]
+"230
+[v _Initialize_UART Initialize_UART `(v  1 e 1 0 ]
+"258
+[v _UART_send_char UART_send_char `(v  1 e 1 0 ]
+"264
+[v _main main `(v  1 e 1 0 ]
+"217 C:/Program Files/Microchip/xc8/v2.31/pic/include/proc\pic16f877a.h
+[v _PORTB PORTB `VEuc  1 e 1 @6 ]
+"341
+[v _PORTD PORTD `VEuc  1 e 1 @8 ]
+"1060
+[v _TXREG TXREG `VEuc  1 e 1 @25 ]
+"1153
+[v _ADRESH ADRESH `VEuc  1 e 1 @30 ]
+"1160
+[v _ADCON0 ADCON0 `VEuc  1 e 1 @31 ]
+"1326
+[v _TRISA TRISA `VEuc  1 e 1 @133 ]
+"1376
+[v _TRISB TRISB `VEuc  1 e 1 @134 ]
+"1438
+[v _TRISC TRISC `VEuc  1 e 1 @135 ]
+"1500
+[v _TRISD TRISD `VEuc  1 e 1 @136 ]
+"1562
+[v _TRISE TRISE `VEuc  1 e 1 @137 ]
+"2081
+[v _SPBRG SPBRG `VEuc  1 e 1 @153 ]
+"2223
+[v _ADRESL ADRESL `VEuc  1 e 1 @158 ]
+"2230
+[v _ADCON1 ADCON1 `VEuc  1 e 1 @159 ]
+"2417
+[v _BRGH BRGH `VEb  1 e 0 @1218 ]
+"2516
+[v _CREN CREN `VEb  1 e 0 @196 ]
+"2579
+[v _GO_nDONE GO_nDONE `VEb  1 e 0 @250 ]
+"2675
+[v _RB0 RB0 `VEb  1 e 0 @48 ]
+"2795
+[v _RX9 RX9 `VEb  1 e 0 @198 ]
+"2813
+[v _SPEN SPEN `VEb  1 e 0 @199 ]
+"2843
+[v _SYNC SYNC `VEb  1 e 0 @1220 ]
+"2978
+[v _TRISC6 TRISC6 `VEb  1 e 0 @1086 ]
+"2981
+[v _TRISC7 TRISC7 `VEb  1 e 0 @1087 ]
+"3023
+[v _TX9 TX9 `VEb  1 e 0 @1222 ]
+"3032
+[v _TXEN TXEN `VEb  1 e 0 @1221 ]
+"14 E:\lmm.X\nb.c
+[v _data data `[30]us  1 e 60 0 ]
+"15
+[v _acc acc `[10]us  1 e 20 0 ]
+"16
+[v _tensionL tensionL `uc  1 e 1 0 ]
+[v _tensionH tensionH `uc  1 e 1 0 ]
+[v _tempH tempH `uc  1 e 1 0 ]
+[v _tempL tempL `uc  1 e 1 0 ]
+[v _currentH currentH `uc  1 e 1 0 ]
+[v _currentL currentL `uc  1 e 1 0 ]
+[v _s s `uc  1 e 1 0 ]
+"17
+[v _check check `uc  1 e 1 0 ]
+"19
+[v _somme somme `ul  1 e 4 0 ]
+[v _av av `ul  1 e 4 0 ]
+[v _co co `ul  1 e 4 0 ]
+"20
+[v _val val `VEus  1 e 2 0 ]
+"21
+[v _rpt rpt `i  1 e 2 0 ]
+"23
+[v _c c `us  1 e 2 0 ]
+[v _value value `us  1 e 2 0 ]
+[v _temp temp `us  1 e 2 0 ]
+[v _k k `us  1 e 2 0 ]
+[v _courant courant `us  1 e 2 0 ]
+[v _tension tension `us  1 e 2 0 ]
+"264
+[v _main main `(v  1 e 1 0 ]
+{
+"373
+} 0
+"258
+[v _UART_send_char UART_send_char `(v  1 e 1 0 ]
+{
+[v UART_send_char@bt bt `uc  1 a 1 wreg ]
+[v UART_send_char@bt bt `uc  1 a 1 wreg ]
+"261
+[v UART_send_char@bt bt `uc  1 a 1 0 ]
+"262
+} 0
+"230
+[v _Initialize_UART Initialize_UART `(v  1 e 1 0 ]
+{
+"255
+} 0
+"30
+[v _ADC_Init ADC_Init `(v  1 e 1 0 ]
+{
+"34
+} 0
+"208
+[v _ADC3 ADC3 `(v  1 e 1 0 ]
+{
+"214
+[v ADC3@i i `i  1 a 2 8 ]
+"228
+} 0
+"161
+[v _ADC2 ADC2 `(v  1 e 1 0 ]
+{
+"205
+} 0
+"140
+[v _num num `(v  1 e 1 0 ]
+{
+"143
+[v num@i i `i  1 a 2 8 ]
+"156
+} 0
+"55
+[v _ADC_Read1 ADC_Read1 `(ui  1 e 2 0 ]
+{
+[v ADC_Read1@channel channel `ui  1 p 2 0 ]
+"69
+} 0
+"104
+[v _aver aver `(v  1 e 1 0 ]
+{
+"107
+[v aver@i i `i  1 a 2 11 ]
+"117
+} 0
+"93
+[v _Shi Shi `(v  1 e 1 0 ]
+{
+"96
+[v Shi@i i `i  1 a 2 4 ]
+"103
+} 0
+"119
+[v _ADC1 ADC1 `(v  1 e 1 0 ]
+{
+"127
+[v ADC1@i i `i  1 a 2 21 ]
+"139
+} 0
+"81
+[v _averge averge `(v  1 e 1 0 ]
+{
+"84
+[v averge@i i `i  1 a 2 11 ]
+"91
+} 0
+"5 C:\Program Files\Microchip\xc8\v2.31\pic\sources\c90\common\__lldiv.c
+[v ___lldiv __lldiv `(ul  1 e 4 0 ]
+{
+"10
+[v ___lldiv@quotient quotient `ul  1 a 4 9 ]
+"11
+[v ___lldiv@counter counter `uc  1 a 1 13 ]
+"5
+[v ___lldiv@divisor divisor `ul  1 p 4 0 ]
+[v ___lldiv@dividend dividend `ul  1 p 4 4 ]
+"30
+} 0
+"70 E:\lmm.X\nb.c
+[v _Shift Shift `(v  1 e 1 0 ]
+{
+"73
+[v Shift@i i `i  1 a 2 4 ]
+"80
+} 0
+"36
+[v _ADC_Read ADC_Read `(ui  1 e 2 0 ]
+{
+[v ADC_Read@channel channel `ui  1 p 2 0 ]
+"50
+} 0

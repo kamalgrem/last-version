@@ -3,8 +3,8 @@
 #pragma config WDTE = OFF       // Watchdog Timer Enable bit (WDT disabled)
 #pragma config PWRTE = ON       // Power-up Timer Enable bit (PWRT enabled)
 #pragma config CP = OFF         // FLASH Program Memory Code Protection bits (Code protection off)
-#pragma config BOREN = ON       // Brown-out Reset Enable bit (BOR enabled)
-#pragma config LVP = ON         // Low Voltage In-Circuit Serial Programming Enable bit (RB3/PGM pin has PGM function; low-voltage programming enabled)
+#pragma config BOREN = ON       // Brown-out Reset Enhable bit (BOR enabled)
+#pragma config LVP = ON         // Low Voljtage In-Circuit Serial Programming Enable bit (RB3/PGM pin has PGM function; low-voltage programming enabled)
 #pragma config CPD = OFF        // Data EE Memory Code Protection (Code Protection off)
 #include <xc.h>
 #include<pic16f877a.h>
@@ -17,10 +17,10 @@ char tensionL,tensionH, tempH,tempL,currentH,currentL,s;
 char check;
 
 unsigned long somme,av,co;
-
+volatile unsigned int short val ;
 int rpt;
 
-unsigned short int  c,value,val,temp,k,courant,tension;
+unsigned short int  c,value,temp,k,courant,tension;
 
 
 void ADC_Init();
@@ -29,7 +29,7 @@ void ADC_Init();
 
 void ADC_Init()
 {
-  ADCON0 = 0x81;               //Turn ON ADC and Clock Selection
+  ADCON0 = 0x81;               //Turn ON ADC and Clock Selectiojjjn
   ADCON1 = 0xC0;               //All pins as Analog Input and setting Reference Voltages
 }
 
@@ -48,6 +48,10 @@ unsigned int ADC_Read( unsigned int channel)
   while(GO_nDONE);             //Waiting for conversion to complete
   return ((ADRESH<<8)+ADRESL); //Return result
 }
+
+
+
+
 unsigned int ADC_Read1( unsigned int channel)
 {
   if(channel > 7)              //Channel range is 0 ~ 7
@@ -63,7 +67,7 @@ unsigned int ADC_Read1( unsigned int channel)
   while(GO_nDONE);             //Waiting for conversion to complete
   return ((ADRESH<<8)+ADRESL); //Return result
 }
-void Shift()
+void Shift()       //function of shift&averge it's numeric filter (IIR)
 {
     k=0;
     for(int i=0;i<29;i++){
@@ -85,6 +89,7 @@ void averge(){
     
     tempH=temp>>8;
 }
+
 void Shi()
 {
     k=0;
@@ -118,11 +123,11 @@ void ADC1()
    c=0;
 
    
-   __delay_ms(8);
+   __delay_ms(1);
     for(int i=0; i<40;i++)
     {
          c=ADC_Read(s);
-         __delay_ms(8);
+         __delay_ms(5);
         somme=somme+c;
    
         
@@ -132,101 +137,69 @@ void ADC1()
     averge();
     somme=0;
 }
-void ADC2()
+void num() // current sensor ADC 
 {
-   somme=0;
-   c=0;
-   
-   __delay_ms(8);
-    for(int i=0; i<40;i++)
-    {
-         c=ADC_Read1(s);
-         __delay_ms(10);
-         somme=somme+c;
-    
-    }
-   val=somme/40;
-  if(val>0x2b8 && val<0xcd)
-   {
-       s=4;
-       somme=0;
-        c=0;
-       __delay_ms(8);
-        for(int i=0; i<40;i++)
+    __delay_ms(1);
+        for(int i=0; i<20;i++)
         {
         
-          s=4;
+          
           c=ADC_Read1(s);
-          __delay_ms(10);
+          __delay_ms(5);
           somme=somme+c;
     
          }
-         val=somme/40;
-        if(val>0x2b8 && val<0xcd)
+       
+         val=somme/20;
+    
+    
+}
+
+
+
+
+void ADC2() // fucntion of switiching between OP AMP1- OP AMP2
+{
+   somme=0;
+   c=0;
+   num();       
+         if((val < 0x2b8) && (val >  0xcd))    // IF MEASURED VALUE LESS THAN 3.4V  and greater than 0.6v
           {
-               s=5;
-                somme=0;
-                  c=0;
-                 __delay_ms(8);
-                  for(int i=0; i<40;i++)
-                  {
-                      
-                    s=5;
-                     c=ADC_Read1(s);
-                     __delay_ms(10);
-                     somme=somme+c;
-    
-                   }
-                   val=somme/40;
-                     if(val>0x2b8 && val<0xcd)
-                          {
-                             s=6;
-                               somme=0;
-                                 c=0;
-                                  __delay_ms(8);
-                                for(int i=0; i<40;i++)
-                               {
-        
-                                     s=6;
-                                     c=ADC_Read1(s);
-                                     __delay_ms(10);
-                                     somme=somme+c;
-    
-                                 }
-                                     check=3; 
-                                    Shi();
-                                   
-                                    aver();
-                             
-                           }
-         
-                      else
-                        {
-                    check=2;
-                        Shi();
-                    
-                        aver();
-                       
-                        }
+            check=0;  
            }
          else
-         {
-           check=1;
-            Shi();
-            
-            aver();
+           {
+             
            
-         }
-   }
-   else
-   {
-       check=0;
-        Shi();
-       
-        aver();
-        
-   }
    
+            s=5;              // read from pin PORTA.A5
+            num();            //ADC 
+            if((val < 0x2b8) && (val >  0xcd))    // IF MEASURED VALUE LESS THAN 3.4V  and greater than 0.6v
+              {
+               check=1;  
+               }
+               else        // IF MEASURED VALUE GREATER (means the OP AMP saturated)
+               {
+                 s=6;     // read from pin PORTA.A6
+           
+                 num();       
+                 if((val < 0x2b8) && (val >  0xcd))// IF MEASURED VALUE LESS THAN 3.4V  and greater than 0.6v
+                    {
+                    check=2;  
+                    }
+                 else
+                 {
+                    s=7;
+                    num();             
+                        check=3;         
+            }   
+         }
+    }
+   
+    
+   Shi();
+                                   
+    aver();
     somme=0;
    
 }
@@ -287,44 +260,23 @@ void UART_send_char(char bt)
    
     TXREG = bt; 
 }
-void UART_send_string(char* st_pt)
-{
-    while(*st_pt) //if there is a char
-        UART_send_char(*st_pt++); //process it as a byte data
-}
 
 void main (void ){
-    
     TRISB=0x00;
     TRISD=0x00;
     TRISA=0xff;
     TRISE=0xff;
     TRISC=0x00;
-    
     Initialize_UART();    //Initialize UART module   
     ADC_Init();
-     
-    
-   
         __delay_ms(600);
-       
-   
-        
-      
-       
     PORTD=0x00;
     PORTB=0x00;
-    
- 
     while(1)
     {
-     
-        
-  
+
         for(rpt=0;rpt<5;rpt++)
-        {
-            
-           
+        {  
             __delay_ms(50);
             
             
@@ -373,7 +325,7 @@ void main (void ){
           
           __delay_ms(10);
           
-           s=2;
+           s=4;
           ADC2();
           UART_send_char('l');
           __delay_ms(10);
@@ -400,13 +352,19 @@ void main (void ){
           __delay_ms(10);
         }
      
-        if(tension>955)
+        if(temp>0x333)
+        {
             RB0=1;
+            
+        }
+        else 
+        {
+            
         if(tension<649)
             RB0=0;
         }
         
-            
+    }       
     
         
        

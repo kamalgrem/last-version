@@ -24,7 +24,7 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 
 
 # Project Name
-PROJECTNAME=lm.X
+PROJECTNAME=lmm.X
 
 # Active Configuration
 DEFAULTCONF=default
